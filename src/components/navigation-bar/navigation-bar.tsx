@@ -9,8 +9,9 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { AppRoute } from '../../const';
+import { MenuItemType } from '../../types';
 
-const pages = [
+const pages: Array<MenuItemType> = [
   {
     name: 'Login',
     url: AppRoute.Login,
