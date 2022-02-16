@@ -39,10 +39,10 @@ export default function Registration() {
       alert('Invalid email');
       return;
     } else if (!isPasswordValid(userInput.password)) {
-      alert('Invalid password');
+      alert('Password should contain at least 1 capital letter and be 4-10 length');
       return;
     } else if (userInput.password !== userInput.repeatPassword) {
-      alert('Invalid repeat password');
+      alert('Repeat your password correctly');
       return;
     }
     const userData = {

@@ -8,22 +8,41 @@ import {
   createTheme,
   ThemeProvider
 } from '@mui/material/styles';
-import NavigationBar from '../navigation-bar/navigation-bar';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginAction } from '../../store/api-action';
+import NavigationBar from '../navigation-bar/navigation-bar';
+import {
+  isEmailValid,
+  isPasswordValid
+} from '../../utils';
+import { UserDataType } from '../../types';
 
 const theme = createTheme();
+const defaultUserInput: UserDataType = {
+  email: '',
+  password: '',
+};
 
 export default function Login(): JSX.Element {
+  const [userInput, setUserInput] = useState<UserDataType>(defaultUserInput);
   const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (!isEmailValid(userInput.email)) {
+      alert('Invalid email');
+      return;
+    } else if (!isPasswordValid(userInput.password)) {
+      alert('Password should contain at least 1 capital letter and be 4-10 length');
+      return;
+    }
     const userData = {
-      email: 'user@mail.com',
-      password: '12345678',
+      email: userInput.email,
+      password: userInput.password,
     };
+
     dispatch(loginAction(userData));
   };
 
@@ -45,6 +64,8 @@ export default function Login(): JSX.Element {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
+              onChange={(evt) => setUserInput({...userInput, email: evt.currentTarget.value})}
+              value={userInput.email}
               margin="normal"
               required
               fullWidth
@@ -54,6 +75,8 @@ export default function Login(): JSX.Element {
               autoFocus
             />
             <TextField
+              onChange={(evt) => setUserInput({...userInput, password: evt.currentTarget.value})}
+              value={userInput.password}
               margin="normal"
               required
               fullWidth
