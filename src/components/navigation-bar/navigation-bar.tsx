@@ -2,14 +2,13 @@ import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-// import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
-const pages = ['SignIn', 'SignUp', 'Change Password'];
+const pages = ['Login', 'Registration', 'Change Password'];
 
 export default function NavigationBar (): JSX.Element {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
