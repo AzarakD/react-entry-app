@@ -9,18 +9,22 @@ import {
   ThemeProvider
 } from '@mui/material/styles';
 import NavigationBar from '../navigation-bar/navigation-bar';
+import { useDispatch } from 'react-redux';
+import { loginAction } from '../../store/api-action';
 
 const theme = createTheme();
 
 export default function Login(): JSX.Element {
+  const dispatch = useDispatch();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    const userData = {
+      email: 'user@mail.com',
+      password: '12345678',
+    };
+    dispatch(loginAction(userData));
   };
 
   return (

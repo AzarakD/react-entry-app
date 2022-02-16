@@ -1,3 +1,6 @@
+import { Action } from 'redux';
+import { ThunkAction } from 'redux-thunk';
+import { AxiosInstance } from 'axios';
 import { AuthStatus } from './const';
 
 export type MenuItemType = {
@@ -13,3 +16,22 @@ export enum ActionType {
   Authorization = 'user/authorization',
   Registration = 'user/registration',
 };
+
+export type UserDataType = {
+  email: string,
+  password: string,
+};
+
+export type RegUserInput = UserDataType & {
+  repeatPassword: string,
+};
+
+export type ServerResponse = {
+  accessToken: string,
+  user: {
+    email: string,
+    id: number,
+  },
+};
+
+export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

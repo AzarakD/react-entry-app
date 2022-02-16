@@ -10,21 +10,32 @@ import {
   createTheme,
   ThemeProvider
 } from '@mui/material/styles';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { regAction } from '../../store/api-action';
 import NavigationBar from '../navigation-bar/navigation-bar';
 import { AppRoute } from '../../const';
+import { RegUserInput } from '../../types';
 
 const theme = createTheme();
+const defaultUserInput: RegUserInput = {
+  email: '',
+  password: '',
+  repeatPassword: '',
+};
 
 export default function Registration() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-      repeatPassword: data.get('repeat-password'),
-    });
+  const [userInput, setUserInput] = useState<RegUserInput>(defaultUserInput);
+  const dispatch = useDispatch();
+
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    const userData = {
+      email: userInput.email,
+      password: userInput.password,
+    };
+    dispatch(regAction(userData));
   };
 
   return (
@@ -45,6 +56,8 @@ export default function Registration() {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <TextField
+              onChange={(evt) => setUserInput({...userInput, email: evt.currentTarget.value})}
+              value={userInput.email}
               margin="normal"
               required
               fullWidth
@@ -54,6 +67,8 @@ export default function Registration() {
               autoFocus
             />
             <TextField
+              onChange={(evt) => setUserInput({...userInput, password: evt.currentTarget.value})}
+              value={userInput.password}
               margin="normal"
               required
               fullWidth
@@ -63,6 +78,8 @@ export default function Registration() {
               id="password"
             />
             <TextField
+              onChange={(evt) => setUserInput({...userInput, repeatPassword: evt.currentTarget.value})}
+              value={userInput.repeatPassword}
               margin="normal"
               required
               fullWidth
