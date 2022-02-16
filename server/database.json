@@ -1,19 +1,9 @@
 {
   "users": [
     {
-      "email": "user@mail.com",
-      "password": "$2a$10$NT6JsbOhVMTE0gA0IELvHeUogsYA2j2beaD0HvI1ih40663pv9lDi",
+      "email": "qqq@ddd.com",
+      "password": "$2a$10$4oorAFcEuJS2iBKNaTSc.u2hYwmchbNYZL5BRBL8klZ12SXrCKe1i",
       "id": 1
-    },
-    {
-      "email": "some@mail.com",
-      "password": "$2a$10$dS8W39toYtbmvCuIVJybsONXZ/mvo7qOw6fUEIQ0QHpsw8mp7p0Cm",
-      "id": 2
-    },
-    {
-      "email": "asfgdsfh@sad.gh",
-      "password": "$2a$10$8RWxMAiNNWYPFLhv.37ilehVTHsqUW9PuhZ5rx6BlurQcPfAjUsfm",
-      "id": 3
     }
   ]
 }

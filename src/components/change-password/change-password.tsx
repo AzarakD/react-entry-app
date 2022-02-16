@@ -9,19 +9,37 @@ import {
   ThemeProvider
 } from '@mui/material/styles';
 import NavigationBar from '../navigation-bar/navigation-bar';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { changePassAction } from '../../store/api-action';
+import { isEmailValid, isPasswordValid } from '../../utils';
+import { ChangePassUserInput } from '../../types';
 
 const theme = createTheme();
+const defaultUserInput: ChangePassUserInput = {
+  currentPassword: '',
+  newPassword: '',
+  repeatPassword: '',
+};
 
 export default function ChangePassword() {
+  const [userInput, setUserInput] = useState<ChangePassUserInput>(defaultUserInput);
+  const dispatch = useDispatch();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      currentPassword: data.get('current-password'),
-      newPassword: data.get('new-password'),
-      confirmPassword: data.get('confirm-password'),
-    });
+
+    if (!isEmailValid(userInput.currentPassword)) {
+      alert('Password should contain at least 1 capital letter and be 4-10 length');
+      return;
+    } else if (!isPasswordValid(userInput.newPassword)) {
+      alert('Password should contain at least 1 capital letter and be 4-10 length');
+      return;
+    } else if (userInput.newPassword !== userInput.repeatPassword) {
+      alert('Repeat your password correctly');
+      return;
+    }
+    dispatch(changePassAction(userInput.newPassword));
   };
 
   return (
@@ -42,6 +60,8 @@ export default function ChangePassword() {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <TextField
+              onChange={(evt) => setUserInput({...userInput, currentPassword: evt.currentTarget.value})}
+              value={userInput.currentPassword}
               margin="normal"
               required
               fullWidth
@@ -52,6 +72,8 @@ export default function ChangePassword() {
               autoFocus
             />
             <TextField
+              onChange={(evt) => setUserInput({...userInput, newPassword: evt.currentTarget.value})}
+              value={userInput.newPassword}
               margin="normal"
               required
               fullWidth
@@ -61,13 +83,15 @@ export default function ChangePassword() {
               id="new-password"
             />
             <TextField
+              onChange={(evt) => setUserInput({...userInput, repeatPassword: evt.currentTarget.value})}
+              value={userInput.repeatPassword}
               margin="normal"
               required
               fullWidth
-              name="confirm-password"
-              label="Confirm Password"
+              name="repeat-password"
+              label="Repeat Password"
               type="password"
-              id="confirm-password"
+              id="repeat-password"
             />
             <Button
               type="submit"

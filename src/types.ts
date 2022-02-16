@@ -10,11 +10,13 @@ export type MenuItemType = {
 
 export type State = {
   authStatus: AuthStatus,
+  userId: null | number,
 };
 
 export enum ActionType {
   Authorization = 'user/authorization',
   Registration = 'user/registration',
+  RedirectToRoute = 'app/redirect',
 };
 
 export type UserDataType = {
@@ -23,6 +25,12 @@ export type UserDataType = {
 };
 
 export type RegUserInput = UserDataType & {
+  repeatPassword: string,
+};
+
+export type ChangePassUserInput = {
+  currentPassword: string,
+  newPassword: string,
   repeatPassword: string,
 };
 

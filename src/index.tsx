@@ -5,9 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createAPI } from './services/api';
 import { reducer } from './store/reducer';
-import { authorization } from './store/action';
 import App from './components/app';
-import { AuthStatus } from './const';
 import './index.css';
 
 const api = createAPI();
@@ -21,8 +19,6 @@ const store = configureStore({
       },
     }),
 });
-
-store.dispatch(authorization(AuthStatus.NoAuth));
 
 ReactDOM.render(
   <React.StrictMode>

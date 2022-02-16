@@ -1,13 +1,17 @@
 import { createAction } from '@reduxjs/toolkit';
-import { AuthStatus } from '../const';
 import { ActionType } from '../types';
 
 export const authorization = createAction(
   ActionType.Authorization,
-  (authStatus: AuthStatus) => ({payload: authStatus}),
+  (userId: number) => ({payload: userId}),
 );
 
 export const registration = createAction(
   ActionType.Registration,
-  (authStatus: AuthStatus) => ({payload: authStatus}),
+  (userId: number) => ({payload: userId}),
+);
+
+export const redirectToRoute = createAction(
+  ActionType.RedirectToRoute,
+  (url: string) => ({payload: url}),
 );

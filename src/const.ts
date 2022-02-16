@@ -7,6 +7,7 @@ export enum AppRoute {
 export enum APIRoute {
   Login = '/login',
   Registration = '/register',
+  Users = '/users',
 };
 
 export enum AuthStatus {
