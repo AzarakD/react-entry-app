@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import {
+  Navigate,
   Route,
   Routes,
   useNavigate
@@ -29,10 +30,8 @@ export default function App(): JSX.Element {
       <Route path={AppRoute.Login} element={<Login />} />
       <Route path={AppRoute.Registration} element={<Registration />} />
       <Route path={AppRoute.ChangePassword} element={<ChangePassword />} />
-      {/* <Route
-        path="*"
-        element={<Navigate to="/" />}
-      /> */}
+      <Route path="*" element={<Navigate to={AppRoute.Login} />}
+      />
     </Routes>
   );
 }

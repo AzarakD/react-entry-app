@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,26 +6,24 @@ import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { AppRoute } from '../../const';
+import {
+  useEffect,
+  useState
+} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getAuthStatus } from '../../store/selector';
+import {
+  AppRoute,
+  AuthStatus
+} from '../../const';
 import { MenuItemType } from '../../types';
-
-const pages: Array<MenuItemType> = [
-  {
-    name: 'Login',
-    url: AppRoute.Login,
-  },
-  {
-    name: 'Registration',
-    url: AppRoute.Registration,
-  },
-  {
-    name: 'Change Password',
-    url: AppRoute.ChangePassword,
-  },
-];
 
 export default function NavigationBar (): JSX.Element {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [pages, setPages] = useState<MenuItemType[]>([]);
+
+  const authStatus = useSelector(getAuthStatus);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -38,6 +34,28 @@ export default function NavigationBar (): JSX.Element {
     setAnchorElNav(null);
     navigate(url);
   };
+
+  useEffect(() => {
+    if (authStatus !== AuthStatus.Auth) {
+      setPages([
+        {
+          name: 'Login',
+          url: AppRoute.Login,
+        },
+        {
+          name: 'Registration',
+          url: AppRoute.Registration,
+        },
+      ]);
+    } else {
+      setPages([
+        {
+          name: 'Change Password',
+          url: AppRoute.ChangePassword,
+        },
+      ]);
+    }
+  }, [authStatus]);
 
   return (
     <AppBar position="static">

@@ -19,6 +19,16 @@
       "email": "aasd@addsa.com",
       "password": "$2a$10$ZlzBBfwj.cJGbHBX0USB1.mhaIEjqhhdptTwdPJsE7.oMk0k6QWOy",
       "id": 4
+    },
+    {
+      "email": "as@as.com",
+      "password": "$2a$10$qm5cZXbuCEai.6TKBMpIKuyZOqjA4BJ70xa8PJE098Ie.53zaSn4i",
+      "id": 5
+    },
+    {
+      "email": "qwe@qwe.com",
+      "password": "$2a$10$NS7m4qWbeXPM1r.uTB4CQeQf/N3Jmw/6VvGh11MmDADMQNVMAjF5.",
+      "id": 6
     }
   ]
 }
