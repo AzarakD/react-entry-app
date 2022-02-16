@@ -11,14 +11,15 @@ import {
 
 const theme = createTheme();
 
-export default function SignIn(): JSX.Element {
+export default function ChangePassword() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      currentPassword: data.get('current-password'),
+      newPassword: data.get('new-password'),
+      confirmPassword: data.get('confirm-password'),
     });
   };
 
@@ -35,26 +36,35 @@ export default function SignIn(): JSX.Element {
           }}
         >
           <Typography component="h1" variant="h5">
-            Sign in
+            Change Password
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoFocus
+              name="current-password"
+              label="Current Password"
+              type="password"
+              id="current-password"
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
+              name="new-password"
+              label="New Password"
               type="password"
-              id="password"
+              id="new-password"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="confirm-password"
+              label="Confirm Password"
+              type="password"
+              id="confirm-password"
             />
             <Button
               type="submit"
@@ -62,7 +72,7 @@ export default function SignIn(): JSX.Element {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Confirm
             </Button>
           </Box>
         </Box>

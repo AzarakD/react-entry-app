@@ -10,6 +10,7 @@ import {
   createTheme,
   ThemeProvider
 } from '@mui/material/styles';
+import { AppRoute } from '../../const';
 
 const theme = createTheme();
 
@@ -21,6 +22,7 @@ export default function SignUp() {
     console.log({
       email: data.get('email'),
       password: data.get('password'),
+      repeatPassword: data.get('repeat-password'),
     });
   };
 
@@ -47,7 +49,6 @@ export default function SignUp() {
               id="email"
               label="Email Address"
               name="email"
-              autoComplete="email"
               autoFocus
             />
             <TextField
@@ -58,7 +59,6 @@ export default function SignUp() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
             />
             <TextField
               margin="normal"
@@ -68,7 +68,6 @@ export default function SignUp() {
               label="Repeat Password"
               type="password"
               id="repeat-password"
-              autoComplete="current-password"
             />
             <Button
               type="submit"
@@ -80,7 +79,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="signin" variant="body2">
+                <Link href={AppRoute.Login} variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
