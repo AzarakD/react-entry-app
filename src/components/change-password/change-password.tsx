@@ -49,6 +49,7 @@ export default function ChangePassword() {
               label="Current Password"
               type="password"
               id="current-password"
+              autoFocus
             />
             <TextField
               margin="normal"
