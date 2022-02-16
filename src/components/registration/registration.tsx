@@ -12,8 +12,12 @@ import {
 } from '@mui/material/styles';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { regAction } from '../../store/api-action';
+import { registerAction } from '../../store/api-action';
 import NavigationBar from '../navigation-bar/navigation-bar';
+import {
+  isEmailValid,
+  isPasswordValid
+} from '../../utils';
 import { AppRoute } from '../../const';
 import { RegUserInput } from '../../types';
 
@@ -31,11 +35,21 @@ export default function Registration() {
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
+    if (!isEmailValid(userInput.email)) {
+      alert('Invalid email');
+      return;
+    } else if (!isPasswordValid(userInput.password)) {
+      alert('Invalid password');
+      return;
+    } else if (userInput.password !== userInput.repeatPassword) {
+      alert('Invalid repeat password');
+      return;
+    }
     const userData = {
       email: userInput.email,
       password: userInput.password,
     };
-    dispatch(regAction(userData));
+    dispatch(registerAction(userData));
   };
 
   return (
