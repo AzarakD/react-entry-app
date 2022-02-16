@@ -10,6 +10,7 @@ import {
   createTheme,
   ThemeProvider
 } from '@mui/material/styles';
+import NavigationBar from '../navigation-bar/navigation-bar';
 import { AppRoute } from '../../const';
 
 const theme = createTheme();
@@ -28,6 +29,7 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
+      <NavigationBar />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

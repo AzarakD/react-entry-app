@@ -8,6 +8,7 @@ import {
   createTheme,
   ThemeProvider
 } from '@mui/material/styles';
+import NavigationBar from '../navigation-bar/navigation-bar';
 
 const theme = createTheme();
 
@@ -24,6 +25,7 @@ export default function SignIn(): JSX.Element {
 
   return (
     <ThemeProvider theme={theme}>
+      <NavigationBar />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
