@@ -16,7 +16,6 @@ export type State = {
 export enum ActionType {
   Authorization = 'user/authorization',
   Registration = 'user/registration',
-  RedirectToRoute = 'app/redirect',
 };
 
 export type UserDataType = {

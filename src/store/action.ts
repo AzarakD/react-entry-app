@@ -10,8 +10,3 @@ export const registration = createAction(
   ActionType.Registration,
   (userId: number) => ({payload: userId}),
 );
-
-export const redirectToRoute = createAction(
-  ActionType.RedirectToRoute,
-  (url: string) => ({payload: url}),
-);
