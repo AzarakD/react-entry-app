@@ -37,7 +37,7 @@ export const changePassAction = (password: string): ThunkActionResult =>
   async (_dispatch, getState, api): Promise<void> => {
     try {
       const userId = getState().userId;
-      await api.put(`${APIRoute.Users}/${userId}`, { password: password });
+      await api.patch(`${APIRoute.Users}/${userId}`, { password: password });
 
       alert('Password change success!');
     } catch {

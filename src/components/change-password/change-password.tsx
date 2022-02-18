@@ -12,7 +12,7 @@ import NavigationBar from '../navigation-bar/navigation-bar';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changePassAction } from '../../store/api-action';
-import { isEmailValid, isPasswordValid } from '../../utils';
+import { isPasswordValid } from '../../utils';
 import { ChangePassUserInput } from '../../types';
 
 const theme = createTheme();
@@ -29,7 +29,7 @@ export default function ChangePassword() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!isEmailValid(userInput.currentPassword)) {
+    if (!isPasswordValid(userInput.currentPassword)) {
       alert('Password should contain at least 1 capital letter and be 4-10 length');
       return;
     } else if (!isPasswordValid(userInput.newPassword)) {
