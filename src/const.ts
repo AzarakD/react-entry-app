@@ -15,3 +15,10 @@ export enum AuthStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 };
+
+export enum ToastType {
+  Default = '',
+  Error = 'error',
+  Info = 'info',
+  Success = 'success',
+};

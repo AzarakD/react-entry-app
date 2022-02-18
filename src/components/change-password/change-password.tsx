@@ -8,11 +8,13 @@ import {
   createTheme,
   ThemeProvider
 } from '@mui/material/styles';
-import NavigationBar from '../navigation-bar/navigation-bar';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changePassAction } from '../../store/api-action';
+import { showToast } from '../../store/action';
+import NavigationBar from '../navigation-bar/navigation-bar';
 import { isPasswordValid } from '../../utils';
+import { ToastType } from '../../const';
 import { ChangePassUserInput } from '../../types';
 
 const theme = createTheme();
@@ -30,13 +32,13 @@ export default function ChangePassword() {
     event.preventDefault();
 
     if (!isPasswordValid(userInput.currentPassword)) {
-      alert('Password should contain at least 1 capital letter and be 4-10 length');
+      dispatch(showToast(ToastType.Info, 'Password should contain at least 1 capital letter and be 4-10 length'))
       return;
     } else if (!isPasswordValid(userInput.newPassword)) {
-      alert('Password should contain at least 1 capital letter and be 4-10 length');
+      dispatch(showToast(ToastType.Info, 'Password should contain at least 1 capital letter and be 4-10 length'))
       return;
     } else if (userInput.newPassword !== userInput.repeatPassword) {
-      alert('Repeat your password correctly');
+      dispatch(showToast(ToastType.Info, 'Repeat your password correctly'))
       return;
     }
     dispatch(changePassAction(userInput.newPassword));

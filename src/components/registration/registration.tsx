@@ -13,12 +13,16 @@ import {
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerAction } from '../../store/api-action';
+import { showToast } from '../../store/action';
 import NavigationBar from '../navigation-bar/navigation-bar';
 import {
   isEmailValid,
   isPasswordValid
 } from '../../utils';
-import { AppRoute } from '../../const';
+import {
+  AppRoute,
+  ToastType
+} from '../../const';
 import { RegUserInput } from '../../types';
 
 const theme = createTheme();
@@ -36,13 +40,13 @@ export default function Registration() {
     evt.preventDefault();
 
     if (!isEmailValid(userInput.email)) {
-      alert('Invalid email');
+      dispatch(showToast(ToastType.Info, 'Invalid email'));
       return;
     } else if (!isPasswordValid(userInput.password)) {
-      alert('Password should contain at least 1 capital letter and be 4-10 length');
+      dispatch(showToast(ToastType.Info, 'Password should contain at least 1 capital letter and be 4-10 length'));
       return;
     } else if (userInput.password !== userInput.repeatPassword) {
-      alert('Repeat your password correctly');
+      dispatch(showToast(ToastType.Info, 'Repeat your password correctly'));
       return;
     }
     const userData = {

@@ -6,7 +6,7 @@ import {
   useNavigate
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getAuthStatus } from '../store/selector';
+import { getAuthStatus } from '../store/user/selector';
 import Login from './login/login';
 import Registration from './registration/registration';
 import ChangePassword from './change-password/change-password';

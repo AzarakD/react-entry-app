@@ -17,6 +17,8 @@ import {
   isPasswordValid
 } from '../../utils';
 import { UserDataType } from '../../types';
+import { showToast } from '../../store/action';
+import { ToastType } from '../../const';
 
 const theme = createTheme();
 const defaultUserInput: UserDataType = {
@@ -32,10 +34,10 @@ export default function Login(): JSX.Element {
     event.preventDefault();
 
     if (!isEmailValid(userInput.email)) {
-      alert('Invalid email');
+      dispatch(showToast(ToastType.Info, 'Invalid email'));
       return;
     } else if (!isPasswordValid(userInput.password)) {
-      alert('Password should contain at least 1 capital letter and be 4-10 length');
+      dispatch(showToast(ToastType.Info, 'Password should contain at least 1 capital letter and be 4-10 length'));
       return;
     }
     const userData = {

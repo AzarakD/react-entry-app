@@ -12,7 +12,7 @@ import {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getAuthStatus } from '../../store/selector';
+import { getAuthStatus } from '../../store/user/selector';
 import {
   AppRoute,
   AuthStatus
@@ -36,7 +36,7 @@ export default function NavigationBar (): JSX.Element {
   };
 
   useEffect(() => {
-    if (authStatus !== AuthStatus.Auth) {
+    authStatus !== AuthStatus.Auth ?
       setPages([
         {
           name: 'Login',
@@ -46,15 +46,14 @@ export default function NavigationBar (): JSX.Element {
           name: 'Registration',
           url: AppRoute.Registration,
         },
-      ]);
-    } else {
+      ])
+      : 
       setPages([
         {
           name: 'Change Password',
           url: AppRoute.ChangePassword,
         },
       ]);
-    }
   }, [authStatus]);
 
   return (
@@ -90,11 +89,13 @@ export default function NavigationBar (): JSX.Element {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page.name} onClick={() => handleCloseNavMenu(page.url)}>
-                  <Typography textAlign="center">{page.name}</Typography>
-                </MenuItem>
-              ))}
+              {
+                pages.map((page) => (
+                  <MenuItem key={page.name} onClick={() => handleCloseNavMenu(page.url)}>
+                    <Typography textAlign="center">{page.name}</Typography>
+                  </MenuItem>
+                ))
+              }
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>

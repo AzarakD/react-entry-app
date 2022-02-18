@@ -2,16 +2,16 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   authorization,
   registration
-} from './action';
-import { AuthStatus } from '../const';
-import { State } from '../types';
+} from '../action';
+import { AuthStatus } from '../../const';
+import { UserState } from '../../types';
 
-export const initialState: State = {
+const initialState: UserState = {
   authStatus: AuthStatus.Unknown,
   userId: null,
 };
 
-export const reducer = createReducer(initialState, (builder) => {
+export const userReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(authorization, (state, action) => {
       state.authStatus = AuthStatus.Auth;

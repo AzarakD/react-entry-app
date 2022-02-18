@@ -1,8 +1,12 @@
 import {
   authorization,
-  registration
+  registration,
+  showToast
 } from './action';
-import { APIRoute } from '../const';
+import {
+  APIRoute,
+  ToastType
+} from '../const';
 import {
   UserDataType,
   ServerResponse,
@@ -15,9 +19,9 @@ export const registerAction = (loginData: UserDataType): ThunkActionResult =>
       const {data} = await api.post<ServerResponse>(APIRoute.Registration, loginData);
 
       dispatch(registration(data.user.id));
-      alert('Registration success!');
+      dispatch(showToast(ToastType.Success, 'Registration success!'));
     } catch {
-      alert('Error :( Try again later.');
+      dispatch(showToast(ToastType.Error, 'Error :( Try again later.'));
     }
   };
 
@@ -27,20 +31,20 @@ export const loginAction = (loginData: UserDataType): ThunkActionResult =>
       const {data} = await api.post<ServerResponse>(APIRoute.Login, loginData);
 
       dispatch(authorization(data.user.id));
-      alert('Login success!');
+      dispatch(showToast(ToastType.Success, 'Login success!'));
     } catch {
-      alert('Wrong email or password.');
+      dispatch(showToast(ToastType.Error, 'Wrong email or password.'));
     }
   };
 
 export const changePassAction = (password: string): ThunkActionResult =>
-  async (_dispatch, getState, api): Promise<void> => {
+  async (dispatch, getState, api): Promise<void> => {
     try {
-      const userId = getState().userId;
+      const userId = getState().user.userId;
       await api.patch(`${APIRoute.Users}/${userId}`, { password: password });
 
-      alert('Password change success!');
+      dispatch(showToast(ToastType.Success, 'Password change success!'));
     } catch {
-      alert('Error :( Try again later.');
+      dispatch(showToast(ToastType.Error, 'Error :( Try again later.'));
     }
   };
